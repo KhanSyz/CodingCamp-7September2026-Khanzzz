@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HEADER — Greeting & Theme Toggle
+  ════════════════════════════════════════ -->
+  <header class="header">
+
+    <div class="header-left">
+      <p id="current-date" class="date"></p>
+      <h1 id="greeting-text" class="greeting"></h1>
+      <p id="current-time" class="time"></p>
+
+      <!-- Name badge -->
+      <div class="name-row">
+        <span id="name-display" class="name-display"></span>
+        <button id="edit-name-btn" class="icon-btn" title="Edit your name" aria-label="Edit name">✏️</button>
+      </div>
+
+      <!-- Name input (hidden by default) -->
+      <div id="name-input-row" class="name-input-row hidden">
+        <input id="name-input" type="text" placeholder="Enter your name…" maxlength="30" />
+        <button id="save-name-btn" class="btn btn-primary">Save</button>
+        <button id="cancel-name-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="theme-toggle" class="theme-toggle" title="Toggle light / dark mode" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       MAIN DASHBOARD — 3-column grid
+  ════════════════════════════════════════ -->
+  <main class="dashboard">
+
+    <!-- ── Focus Timer ── -->
+    <section class="card" id="timer-card">
+      <div class="card-header">
+        <span class="card-icon">⏱</span>
+        <h2 class="card-title">Focus Timer</h2>
+      </div>
+
+      <div class="timer-ring-wrap">
+        <div class="timer-display" id="timer-display">25:00</div>
+        <p class="timer-status" id="timer-status">Ready</p>
+      </div>
+
+      <div class="timer-controls">
+        <button id="timer-start" class="btn btn-primary">▶ Start</button>
+        <button id="timer-stop"  class="btn btn-secondary">⏸ Pause</button>
+        <button id="timer-reset" class="btn btn-ghost">↺ Reset</button>
+      </div>
+
+      <div class="pomodoro-setting">
+        <label for="pomodoro-minutes">Custom (min)</label>
+        <input id="pomodoro-minutes" type="number" min="1" max="120" value="25" />
+        <button id="pomodoro-set" class="btn btn-ghost">Set</button>
+      </div>
+    </section>
+
+    <!-- ── To-Do List ── -->
+    <section class="card" id="todo-card">
+      <div class="card-header">
+        <span class="card-icon">📋</span>
+        <h2 class="card-title">To-Do List</h2>
+        <span id="todo-count" class="badge">0</span>
+      </div>
+
+      <div class="todo-input-row">
+        <input id="todo-input" type="text" placeholder="Add a new task…" maxlength="100" />
+        <button id="todo-add-btn" class="btn btn-primary">Add</button>
+      </div>
+
+      <ul id="todo-list" class="todo-list"></ul>
+      <p id="todo-empty" class="empty-msg">No tasks yet — add one above! 🎯</p>
+    </section>
+
+    <!-- ── Quick Links ── -->
+    <section class="card" id="links-card">
+      <div class="card-header">
+        <span class="card-icon">🔗</span>
+        <h2 class="card-title">Quick Links</h2>
+      </div>
+
+      <div class="link-input-group">
+        <input id="link-name-input" type="text" placeholder="Label (e.g. YouTube)" maxlength="30" />
+        <input id="link-url-input"  type="url"  placeholder="URL (https://…)" />
+        <button id="link-add-btn" class="btn btn-primary">Add</button>
+      </div>
+
+      <div id="links-grid" class="links-grid"></div>
+      <p id="links-empty" class="empty-msg">No links yet — add one above! 🌐</p>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       LOCAL STORAGE DATABASE VIEWER
+  ════════════════════════════════════════ -->
+  <section class="db-panel" id="db-panel">
+    <div class="db-header">
+      <div class="db-title-row">
+        <span class="db-icon">🗄️</span>
+        <h2 class="db-title">Local Storage Database</h2>
+        <span class="db-badge" id="db-record-count">0 records</span>
+      </div>
+      <div class="db-actions">
+        <button id="db-refresh-btn" class="btn btn-ghost btn-sm">⟳ Refresh</button>
+        <button id="db-toggle-btn" class="btn btn-ghost btn-sm">▲ Hide</button>
+      </div>
+    </div>
+
+    <div class="db-body" id="db-body">
+      <div class="db-tabs">
+        <button class="db-tab active" data-key="todos">📋 Tasks</button>
+        <button class="db-tab" data-key="quickLinks">🔗 Links</button>
+        <button class="db-tab" data-key="settings">⚙️ Settings</button>
+      </div>
+      <div class="db-content" id="db-content"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer class="footer">
+    <p>Life Dashboard &nbsp;·&nbsp; Data stored locally in your browser &nbsp;·&nbsp; No server required</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
